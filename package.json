@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
+    "dev": "nodemon -r dotenv/config ./src/server.js",
     "build": "rimraf ./dist && node build.js",
     "deploy": "scp -r ./dist root@152.42.167.40:/var/www/api/dist"
   },
