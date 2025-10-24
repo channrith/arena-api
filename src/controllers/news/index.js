@@ -1,4 +1,5 @@
 const getNewsById = require("./getNewsByIdAction");
 const listNews = require("./listNewsAction");
+const listHighlightsNews = require("./listHighlightsNewsAction");
 
-module.exports = { listNews, getNewsById };
+module.exports = { listHighlightsNews, listNews, getNewsById };

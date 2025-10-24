@@ -1,6 +1,8 @@
 const transformPosts = (apiResponse) => {
   const posts = apiResponse.data.map((item) => {
-    const t = item.current_translation;
+    const t = item.post
+      ? item.post.current_translation
+      : item.current_translation;
     const baseSlug = t?.slug || `post-${item.id}`;
     return {
       id: item.id,
@@ -29,7 +31,9 @@ const transformPosts = (apiResponse) => {
 };
 
 const transformPost = (item) => {
-  const t = item.current_translation;
+  const t = item.post
+    ? item.post.current_translation
+    : item.current_translation;
   return {
     id: item.id,
     published_at: item.published_at,
