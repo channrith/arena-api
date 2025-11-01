@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const { ENV } = require("./constants/envConstant");
-const { newsRoute } = require("./routes");
+const { newsRoute, vehicleRoute } = require("./routes");
 const {
   listHighlightsNews,
   listNewsForSitemap,
@@ -9,6 +9,7 @@ const {
 
 const app = express();
 app.use(cors());
+app.use("/api/vehicle", vehicleRoute);
 app.use("/api/news", newsRoute);
 app.use("/api/highlights", listHighlightsNews);
 app.use("/api/list-for-sitemap", listNewsForSitemap);

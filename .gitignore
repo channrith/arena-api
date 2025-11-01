@@ -55,4 +55,4 @@ Thumbs.db
 package-lock.json
 ecosystem.config.js
 build.js
-
+config/
