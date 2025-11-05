@@ -1,14 +1,26 @@
+const fs = require("fs");
+const path = require("path");
 const axios = require("axios");
-const { ENV } = require("../../constants/envConstant");
 const { transformPosts } = require("../../utils/newsUtil");
 
+const configPath = path.join(path.resolve("config/values.json"));
+
 const listHighlightsNewsAction = async (req, res) => {
+  const rawData = fs.readFileSync(configPath, "utf-8");
+  const CONFIG_VALUE = JSON.parse(rawData);
+
+  if (!CONFIG_VALUE.POST_SERVICE) {
+    return res.status(500).json({ error: "Missing configuration" });
+  }
+
+  const { BASE_URL, API_KEY } = CONFIG_VALUE.POST_SERVICE;
+
   try {
     const apiResponse = await axios.get(
-      `${ENV.POST_SERVICE_URL}/api/v1/highlights`,
+      `${BASE_URL}/api/v1/highlights`,
       {
         headers: {
-          token: ENV.POST_SERVICE_TOKEN, // <-- Added access header
+          token: API_KEY,
         },
       }
     );
