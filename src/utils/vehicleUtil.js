@@ -19,7 +19,8 @@ const transformVehicleMakers = (apiResponse) => {
   const vehicles = apiResponse.data.map((item) => {
     return {
       src: item.image_url,
-      alt: item.name || "Untitled",
+      alt: item.name || "",
+      slug: item.slug || "",
       link: `/make/${item.slug}/local`,
     };
   });
