@@ -6,9 +6,11 @@ const {
   listHighlightsNews,
   listNewsForSitemap,
 } = require("./controllers/news");
+const { listPoster } = require("./controllers/cars");
 
 const app = express();
 app.use(cors());
+app.use("/api/posters", listPoster);
 app.use("/api/vehicle", vehicleRoute);
 app.use("/api/news", newsRoute);
 app.use("/api/highlights", listHighlightsNews);

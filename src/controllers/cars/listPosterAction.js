@@ -4,13 +4,9 @@ const axios = require("axios");
 
 const configPath = path.join(path.resolve("config/values.json"));
 
-const searchVehicleAction = async (req, res) => {
+const listPosterAction = async (req, res) => {
   try {
-    const { q, service } = req.query;
-
-    if (!q) {
-      return res.status(401).json({ error: "Search query missing" });
-    }
+    const { service } = req.query;
 
     let CONFIG_VALUE = {};
     if (service === "acauto") {
@@ -25,7 +21,7 @@ const searchVehicleAction = async (req, res) => {
     const { BASE_URL, API_KEY } = CONFIG_VALUE.ACAUTO_SERVICE;
 
     const { data } = await axios.get(
-      `${BASE_URL}/api/v1/vehicles/search?q=${q}`,
+      `${BASE_URL}/api/v1/posters`,
       {
         headers: {
           token: API_KEY,
@@ -35,9 +31,9 @@ const searchVehicleAction = async (req, res) => {
 
     res.json(data);
   } catch (error) {
-    console.error("Error fetching cars:", error.message);
-    res.status(500).json({ error: "Failed to fetch cars" });
+    console.error("Error fetching posters:", error.message);
+    res.status(500).json({ error: "Failed to fetch posters" });
   }
 };
 
-module.exports = searchVehicleAction;
+module.exports = listPosterAction;

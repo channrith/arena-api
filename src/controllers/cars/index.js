@@ -1,11 +1,13 @@
 const getCarModelById = require("./getCarModelByIdAction");
 const listCarModel = require("./listCarModelAction");
 const searchVehicle = require("./searchVehicleAction");
-const listCarMakeAction = require("./listCarMakeAction");
+const listCarMaker = require("./listCarMakeAction");
+const listPoster = require("./listPosterAction");
 
 module.exports = {
   getCarModelById,
   listCarModel,
   searchVehicle,
-  listCarMakeAction,
+  listCarMaker,
+  listPoster,
 };
