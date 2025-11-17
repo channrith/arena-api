@@ -5,9 +5,10 @@ const { transformVehicleMakers } = require("../../utils/vehicleUtil");
 
 const configPath = path.join(path.resolve("config/values.json"));
 
-const listCarMakeAction = async (req, res) => {
+const getCarMakeBySlugAction = async (req, res) => {
   try {
-    const { limit, service } = req.query;
+    const { slug } = req.params;
+    const { service } = req.query;
 
     let CONFIG_VALUE = {};
     if (service === "acauto") {
@@ -21,8 +22,8 @@ const listCarMakeAction = async (req, res) => {
 
     const { BASE_URL, API_KEY } = CONFIG_VALUE.ACAUTO_SERVICE;
 
-    const { data } = await axios.get(
-      `${BASE_URL}/api/v1/vehicle-makers?limit=${limit}`,
+    const apiResponse = await axios.get(
+      `${BASE_URL}/api/v1/vehicle-makers/${slug}`,
       {
         headers: {
           token: API_KEY,
@@ -30,15 +31,16 @@ const listCarMakeAction = async (req, res) => {
       }
     );
 
-    const transformed = transformVehicleMakers(data);
+    const { data } = apiResponse;
+
     res.json({
-      total: data.total,
-      makers: transformed,
+      image_url: data.banner_image_url,
+      description: data.description,
     });
   } catch (error) {
-    console.error("Error fetching manufacturers:", error.message);
-    res.status(500).json({ error: "Failed to fetch manufacturers" });
+    console.error("Error fetching maker:", error.message);
+    res.status(500).json({ error: "Failed to fetch maker" });
   }
 };
 
-module.exports = listCarMakeAction;
+module.exports = getCarMakeBySlugAction;
