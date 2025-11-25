@@ -8,6 +8,7 @@ const configPath = path.join(path.resolve("config/values.json"));
 const listCarModelAction = async (req, res) => {
   try {
     const { global, maker, service } = req.query;
+    const page = req.query.page || 1;
 
     if (!maker) {
       return res.status(401).json({ error: "Maker missing" });
@@ -26,7 +27,7 @@ const listCarModelAction = async (req, res) => {
     const { BASE_URL, API_KEY } = CONFIG_VALUE.ACAUTO_SERVICE;
 
     const { data } = await axios.get(
-      `${BASE_URL}/api/v1/maker/${maker}/car-models?is_global_model=${global || 0}`,
+      `${BASE_URL}/api/v1/maker/${maker}/car-models?is_global_model=${global || 0}&page=${page}`,
       {
         headers: {
           token: API_KEY,
