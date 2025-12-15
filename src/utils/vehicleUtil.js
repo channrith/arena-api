@@ -21,7 +21,7 @@ const transformVehicleMakers = (apiResponse) => {
       src: item.image_url,
       alt: item.name || "",
       slug: item.slug || "",
-      link: `/make/${item.slug}/local`,
+      link: `/make/${item.slug}/global`,
     };
   });
 
