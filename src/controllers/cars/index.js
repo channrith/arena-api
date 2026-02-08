@@ -4,6 +4,7 @@ const searchVehicle = require("./searchVehicleAction");
 const listCarMaker = require("./listCarMakeAction");
 const getCarMakeBySlug = require("./getCarMakeBySlugAction");
 const listPoster = require("./listPosterAction");
+const vehicleType = require("./vehicleTypeAction");
 
 module.exports = {
   getCarModelById,
@@ -12,4 +13,5 @@ module.exports = {
   listCarMaker,
   getCarMakeBySlug,
   listPoster,
+  vehicleType,
 };
