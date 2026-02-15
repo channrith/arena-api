@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const axios = require("axios");
-const { transformVehicles } = require("../../utils/vehicleUtil");
+const { transformVehicleModels } = require("../../utils/vehicleUtil");
 
 const configPath = path.join(path.resolve("config/values.json"));
 
@@ -36,11 +36,11 @@ const listCarModelBySeriesAction = async (req, res) => {
       }
     );
 
-    const transformed = transformVehicles(data);
+    const transformed = transformVehicleModels(data);
     res.json({
-      current_page: data.current_page,
-      total: data.total,
-      per_page: data.per_page,
+      current_page: data.pagination.current_page,
+      total: data.pagination.total_years,
+      per_page: data.pagination.per_page,
       vehicles: transformed,
     });
   } catch (error) {
